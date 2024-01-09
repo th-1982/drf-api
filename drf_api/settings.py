@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import re
 import dj_database_url
 
 if os.path.exists('env.py'):
@@ -46,6 +47,7 @@ REST_USE_JWT = True
 JWT_AUTH_SECURE = True
 JWT_AUTH_COOKIE = 'my-app-auth'
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
+JWT_AUTH_SAMESITE = 'None'
 
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'drf_api.serializers.CurrentUserSerializer'
@@ -60,7 +62,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['8000-th1982-drfapi-hwxj5wlbs6f.ws-eu107.gitpod.io', 'th-1982-drf-api.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOST'),'8000-th1982-drfapi-hwxj5wlbs6f.ws-eu107.gitpod.io', 'th-1982-drf-api-caf6b85c6f6c.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -114,7 +116,7 @@ else:
     ]
 
 CORS_ALLOW_CREDENTIALS = True
-JWT_AUTH_SAMESITE = 'None'
+
 
 ROOT_URLCONF = 'drf_api.urls'
 
